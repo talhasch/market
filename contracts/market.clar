@@ -14,7 +14,7 @@
 ;; maps 
 
 (define-map ft-whitelist principal bool)
-(define-map orders { order-id: uint } { owner: principal, ft: principal, bid: uint, ask: uint })
+(define-map orders { order-id: uint } { seller: principal, ft: principal, bid: uint, ask: uint })
 
 ;; errors
 
@@ -51,7 +51,7 @@
         (asserts! (> ask u100) err-min-ask)
         (asserts! (is-some (map-get? ft-whitelist ft-address)) err-ft-not-whitelisted)
         (unwrap! (contract-call? ft transfer bid tx-sender self none) err-ft-transfer-error)
-        (map-insert orders {order-id: order-id} {owner: tx-sender, ft: ft-address, bid: bid, ask: ask})
+        (map-insert orders {order-id: order-id} {seller: tx-sender, ft: ft-address, bid: bid, ask: ask})
         (var-set next-order-id (+ (var-get next-order-id) u1))
         (print {op: "create-order", order-id: order-id, owner: tx-sender, ft: ft-address, bid: bid, ask: ask})
         (ok order-id)
@@ -62,7 +62,7 @@
     (let (
             (order (unwrap! (map-get? orders { order-id: order-id }) err-order-not-found))
         ) 
-        (asserts! (is-eq tx-sender (get owner order)) err-not-your-order)
+        (asserts! (is-eq tx-sender (get seller order)) err-not-your-order)
         (let
             (
                 (txsender tx-sender)
@@ -79,7 +79,7 @@
     (let (
             (order (unwrap! (map-get? orders { order-id: order-id }) err-order-not-found))
         ) 
-        (asserts! (is-eq tx-sender (get owner order)) err-not-your-order)
+        (asserts! (is-eq tx-sender (get seller order)) err-not-your-order)
         (asserts! (> ask u100) err-min-ask)
         (map-set orders {order-id: order-id} (merge order {ask: ask}))
         (print {op: "update-order", order-id: order-id, ask: ask})
@@ -93,9 +93,9 @@
             (ask (get ask order))
             (fee (/ (* ask (var-get fee-pct)) u10000))
         ) 
-        (asserts! (not (is-eq tx-sender (get owner order))) err-your-order)
+        (asserts! (not (is-eq tx-sender (get seller order))) err-your-order)
         (asserts! (is-eq (contract-of ft) (get ft order)) err-incorrect-ft)
-        (unwrap! (stx-transfer? (- ask fee) tx-sender (get owner order)) err-coin-transfer-error)
+        (unwrap! (stx-transfer? (- ask fee) tx-sender (get seller order)) err-coin-transfer-error)
         (unwrap! (stx-transfer? fee tx-sender (var-get fee-to)) err-coin-transfer-error)
         (let 
             (

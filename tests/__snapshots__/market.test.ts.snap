@@ -146,7 +146,7 @@ exports[`tests > 2- cancel order > 3- get order 1`] = `
         },
         "type": 6,
       },
-      "owner": {
+      "seller": {
         "address": {
           "hash160": "7321b74e2b6a7e949e6c4ad313035b1665095017",
           "type": 0,
