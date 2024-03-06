@@ -1,6 +1,6 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`tests > basic trade test > 1- balances before trade 1`] = `
+exports[`tests > 1- basic trade test > 1- balances before trade 1`] = `
 Map {
   ".token1.TOKEN1" => Map {
     "ST1SJ3DTE5DN7X54YDH5D64R3BCB6A2AG2ZQ8YPD5" => 1000000000000n,
@@ -20,7 +20,7 @@ Map {
 }
 `;
 
-exports[`tests > basic trade test > 2- order created 1`] = `
+exports[`tests > 1- basic trade test > 2- order created 1`] = `
 {
   "type": 7,
   "value": {
@@ -30,7 +30,7 @@ exports[`tests > basic trade test > 2- order created 1`] = `
 }
 `;
 
-exports[`tests > basic trade test > 3- balances after order creation 1`] = `
+exports[`tests > 1- basic trade test > 3- balances after order creation 1`] = `
 Map {
   ".token1.TOKEN1" => Map {
     "ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.market" => 125000000n,
@@ -51,7 +51,7 @@ Map {
 }
 `;
 
-exports[`tests > basic trade test > 4- order filled 1`] = `
+exports[`tests > 1- basic trade test > 4- order filled 1`] = `
 {
   "type": 7,
   "value": {
@@ -61,7 +61,7 @@ exports[`tests > basic trade test > 4- order filled 1`] = `
 }
 `;
 
-exports[`tests > basic trade test > 5- balances after trade 1`] = `
+exports[`tests > 1- basic trade test > 5- balances after trade 1`] = `
 Map {
   ".token1.TOKEN1" => Map {
     "ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.market" => 0n,
@@ -80,5 +80,160 @@ Map {
     "ST3PF13W7Z0RRM42A8VZRVFQ75SV1K26RXEP8YGKJ" => 100000000000000n,
     "STNHKEPYEPJ8ET55ZZ0M5A34J0R3N5FM2CMMMAZ6" => 100000000000000n,
   },
+}
+`;
+
+exports[`tests > 1- basic trade test > 6- order should be deleted 1`] = `
+{
+  "type": 9,
+}
+`;
+
+exports[`tests > 2- cancel order > 1- balances before trade 1`] = `
+Map {
+  ".token1.TOKEN1" => Map {
+    "ST1SJ3DTE5DN7X54YDH5D64R3BCB6A2AG2ZQ8YPD5" => 1000000000000n,
+  },
+  "STX" => Map {
+    "ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM" => 100000000000000n,
+    "ST1SJ3DTE5DN7X54YDH5D64R3BCB6A2AG2ZQ8YPD5" => 100000000000000n,
+    "ST2CY5V39NHDPWSXMW9QDT3HC3GD6Q6XX4CFRK9AG" => 100000000000000n,
+    "ST2JHG361ZXG51QTKY2NQCVBPPRRE2KZB1HR05NNC" => 100000000000000n,
+    "ST2NEB84ASENDXKYGJPQW86YXQCEFEX2ZQPG87ND" => 100000000000000n,
+    "ST2REHHS5J3CERCRBEPMGH7921Q6PYKAADT7JP2VB" => 100000000000000n,
+    "ST3AM1A56AK2C1XAFJ4115ZSV26EB49BVQ10MGCS0" => 100000000000000n,
+    "ST3NBRSFKX28FQ2ZJ1MAKX58HKHSDGNV5N7R21XCP" => 100000000000000n,
+    "ST3PF13W7Z0RRM42A8VZRVFQ75SV1K26RXEP8YGKJ" => 100000000000000n,
+    "STNHKEPYEPJ8ET55ZZ0M5A34J0R3N5FM2CMMMAZ6" => 100000000000000n,
+  },
+}
+`;
+
+exports[`tests > 2- cancel order > 2- order created 1`] = `
+{
+  "type": 7,
+  "value": {
+    "type": 1,
+    "value": 0n,
+  },
+}
+`;
+
+exports[`tests > 2- cancel order > 3- get order 1`] = `
+{
+  "type": 10,
+  "value": {
+    "data": {
+      "ask": {
+        "type": 1,
+        "value": 10000000n,
+      },
+      "bid": {
+        "type": 1,
+        "value": 125000000n,
+      },
+      "ft": {
+        "address": {
+          "hash160": "6d78de7b0625dfbfc16c3a8a5735f6dc3dc3f2ce",
+          "type": 0,
+          "version": 26,
+        },
+        "contractName": {
+          "content": "token1",
+          "lengthPrefixBytes": 1,
+          "maxLengthBytes": 128,
+          "type": 2,
+        },
+        "type": 6,
+      },
+      "owner": {
+        "address": {
+          "hash160": "7321b74e2b6a7e949e6c4ad313035b1665095017",
+          "type": 0,
+          "version": 26,
+        },
+        "type": 5,
+      },
+    },
+    "type": 12,
+  },
+}
+`;
+
+exports[`tests > 2- cancel order > 4- balances after order creation 1`] = `
+Map {
+  ".token1.TOKEN1" => Map {
+    "ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.market" => 125000000n,
+    "ST1SJ3DTE5DN7X54YDH5D64R3BCB6A2AG2ZQ8YPD5" => 999875000000n,
+  },
+  "STX" => Map {
+    "ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM" => 100000000000000n,
+    "ST1SJ3DTE5DN7X54YDH5D64R3BCB6A2AG2ZQ8YPD5" => 100000000000000n,
+    "ST2CY5V39NHDPWSXMW9QDT3HC3GD6Q6XX4CFRK9AG" => 100000000000000n,
+    "ST2JHG361ZXG51QTKY2NQCVBPPRRE2KZB1HR05NNC" => 100000000000000n,
+    "ST2NEB84ASENDXKYGJPQW86YXQCEFEX2ZQPG87ND" => 100000000000000n,
+    "ST2REHHS5J3CERCRBEPMGH7921Q6PYKAADT7JP2VB" => 100000000000000n,
+    "ST3AM1A56AK2C1XAFJ4115ZSV26EB49BVQ10MGCS0" => 100000000000000n,
+    "ST3NBRSFKX28FQ2ZJ1MAKX58HKHSDGNV5N7R21XCP" => 100000000000000n,
+    "ST3PF13W7Z0RRM42A8VZRVFQ75SV1K26RXEP8YGKJ" => 100000000000000n,
+    "STNHKEPYEPJ8ET55ZZ0M5A34J0R3N5FM2CMMMAZ6" => 100000000000000n,
+  },
+}
+`;
+
+exports[`tests > 2- cancel order > 5- only owner can cancel 1`] = `
+{
+  "type": 8,
+  "value": {
+    "type": 1,
+    "value": 130n,
+  },
+}
+`;
+
+exports[`tests > 2- cancel order > 6- wrong order id 1`] = `
+{
+  "type": 8,
+  "value": {
+    "type": 1,
+    "value": 120n,
+  },
+}
+`;
+
+exports[`tests > 2- cancel order > 7- order cancelled 1`] = `
+{
+  "type": 7,
+  "value": {
+    "type": 1,
+    "value": 0n,
+  },
+}
+`;
+
+exports[`tests > 2- cancel order > 8- balances after cancellation 1`] = `
+Map {
+  ".token1.TOKEN1" => Map {
+    "ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.market" => 0n,
+    "ST1SJ3DTE5DN7X54YDH5D64R3BCB6A2AG2ZQ8YPD5" => 1000000000000n,
+  },
+  "STX" => Map {
+    "ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM" => 100000000000000n,
+    "ST1SJ3DTE5DN7X54YDH5D64R3BCB6A2AG2ZQ8YPD5" => 100000000000000n,
+    "ST2CY5V39NHDPWSXMW9QDT3HC3GD6Q6XX4CFRK9AG" => 100000000000000n,
+    "ST2JHG361ZXG51QTKY2NQCVBPPRRE2KZB1HR05NNC" => 100000000000000n,
+    "ST2NEB84ASENDXKYGJPQW86YXQCEFEX2ZQPG87ND" => 100000000000000n,
+    "ST2REHHS5J3CERCRBEPMGH7921Q6PYKAADT7JP2VB" => 100000000000000n,
+    "ST3AM1A56AK2C1XAFJ4115ZSV26EB49BVQ10MGCS0" => 100000000000000n,
+    "ST3NBRSFKX28FQ2ZJ1MAKX58HKHSDGNV5N7R21XCP" => 100000000000000n,
+    "ST3PF13W7Z0RRM42A8VZRVFQ75SV1K26RXEP8YGKJ" => 100000000000000n,
+    "STNHKEPYEPJ8ET55ZZ0M5A34J0R3N5FM2CMMMAZ6" => 100000000000000n,
+  },
+}
+`;
+
+exports[`tests > 2- cancel order > 9- order should be deleted 1`] = `
+{
+  "type": 9,
 }
 `;
