@@ -90,7 +90,47 @@ describe("tests", () => {
       uintCV(0),
     ], address1).result);
   });
+  
 
+  it("3- update order", () => {
+    whitelisToken();
+
+    expectMatchSnapshot('1- balances trade', simnet.getAssetsMap());
+
+    expectMatchSnapshot('2- order created',
+      simnet.callPublicFn("market", "create-order", [
+        uintCV(125_000000),
+        uintCV(10_000000),
+        contractPrincipalCV(simnet.deployer, "token1")
+      ], address1).result);
+
+      expectMatchSnapshot('3- balances after order creation', simnet.getAssetsMap());
+
+      expectMatchSnapshot('4- get order',
+      simnet.callReadOnlyFn("market", "get-order", [
+        uintCV(0),
+      ], address1).result);
+      
+      expectMatchSnapshot('5- order update',
+      simnet.callPublicFn("market", "update-order", [
+        uintCV(0),
+        uintCV(20_000000)
+      ], address1).result);
+
+      expectMatchSnapshot('6- balances after order update', simnet.getAssetsMap());
+
+      expectMatchSnapshot('7- get order',
+      simnet.callReadOnlyFn("market", "get-order", [
+        uintCV(0),
+      ], address1).result);
+
+      expectMatchSnapshot('8- order update with invalid order id',
+      simnet.callPublicFn("market", "update-order", [
+        uintCV(2),
+        uintCV(20_000000)
+      ], address1).result);
+
+  });
 
   /*
   it("token not whitelisted", () => {
