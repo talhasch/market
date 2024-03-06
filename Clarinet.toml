@@ -12,6 +12,7 @@ epoch = 2.4
 
 [contracts.market]
 path = 'contracts/market.clar'
+depends_on = ["token1"]
 clarity_version = 2
 epoch = 2.4
 

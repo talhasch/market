@@ -11,25 +11,28 @@
     )
     (err u4)))
 
-(define-public (get-balance (owner principal))
+(define-read-only (get-balance (owner principal))
     (ok (ft-get-balance TOKEN1 owner))
 )
 
-(define-public (get-name)
+(define-read-only (get-name)
     (ok "TOKEN1")
 )
 
-(define-public (get-symbol)
+(define-read-only (get-symbol)
     (ok "TO1")
 )
 
-(define-public (get-decimals)
+(define-read-only (get-decimals)
     (ok u6)
 )
 
-(define-public (get-total-supply)
+(define-read-only (get-total-supply)
     (ok (ft-get-supply TOKEN1))
 )
 
-(define-public (get-token-uri)
+(define-read-only (get-token-uri)
   (ok (some u"https://token1.com")))
+
+
+(ft-mint? TOKEN1 u1000000000000 'ST1SJ3DTE5DN7X54YDH5D64R3BCB6A2AG2ZQ8YPD5)
