@@ -14,6 +14,11 @@ epoch = 2.4
 path = 'contracts/market.clar'
 clarity_version = 2
 epoch = 2.4
+
+[contracts.token1]
+path = 'contracts/token1.clar'
+clarity_version = 2
+epoch = 2.4
 [repl.analysis]
 passes = ['check_checker']
 

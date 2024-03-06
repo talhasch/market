@@ -11,12 +11,7 @@ const address1 = accounts.get("wallet_1")!;
 
 describe("example tests", () => {
   it("ensures simnet is well initalised", () => {
-    const { result } = simnet.callPublicFn("market", "create-order", [
-      
-    ], address1);
-
     expect(simnet.blockHeight).toBeDefined();
-
   });
 
   // it("shows an example", () => {
