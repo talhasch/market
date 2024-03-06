@@ -70,6 +70,18 @@
     )
 )
 
+(define-public (update-order (order-id uint) (ask uint))
+    (let (
+            (order (unwrap! (map-get? orders { order-id: order-id }) err-order-not-found))
+        ) 
+        (asserts! (is-eq tx-sender (get owner order)) err-not-your-order)
+        (asserts! (> ask u100) err-min-ask)
+        (map-set orders {order-id: order-id} (merge order {ask: ask}))
+        (print {op: "update-order", order-id: order-id, ask: ask})
+        (ok order-id)
+    )
+)
+
 (define-public (fill-order (order-id uint) (ft <ft-trait>))
   (let (
             (order (unwrap! (map-get? orders { order-id: order-id }) err-order-not-found))
