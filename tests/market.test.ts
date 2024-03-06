@@ -6,34 +6,39 @@ const accounts = simnet.getAccounts();
 const address1 = accounts.get("wallet_1")!;
 const address2 = accounts.get("wallet_2")!;
 
-describe("example tests", () => {
+const whitelisToken = () => {
+  return simnet.callPublicFn("market", "whitelist-ft", [
+    contractPrincipalCV(simnet.deployer, "token1")
+  ], simnet.deployer);
+}
 
-  it("1- admin whitelist token", () => {
-    const result = simnet.callPublicFn("market", "whitelist-ft", [
-      contractPrincipalCV(simnet.deployer, "token1")
-    ], simnet.deployer);
+describe("tests", () => {
 
-    expect(result.events.length).toBeGreaterThan(0)
+  const expectMatchSnapshot = (msg: string, a: any) => {
+    expect(a).toMatchSnapshot(msg)
+  }
 
-    const result2 = simnet.callPublicFn("market", "create-order", [
-      uintCV(125_000000),
-      uintCV(10_000000),
-      contractPrincipalCV(simnet.deployer, "token1")
-    ], address1);
+  it("basic trade test", () => {
+    whitelisToken();
 
-    expect(result2.events.length).toBeGreaterThan(0);
+    expectMatchSnapshot('1- balances before trade', simnet.getAssetsMap());
 
-    console.log(simnet.callReadOnlyFn("token1", "get-balance", [
-      contractPrincipalCV(simnet.deployer, "market")
-    ], address1).result)
+    expectMatchSnapshot('2- order created',
+      simnet.callPublicFn("market", "create-order", [
+        uintCV(125_000000),
+        uintCV(10_000000),
+        contractPrincipalCV(simnet.deployer, "token1")
+      ], address1).result);
 
-    const result3 = simnet.callPublicFn("market", "fill-order", [
-      uintCV(0),
-      contractPrincipalCV(simnet.deployer, "token1")
-    ], address2);
-    
-    console.log(result3.events)
-    
+    expectMatchSnapshot('3- balances after order creation', simnet.getAssetsMap());
+
+    expectMatchSnapshot('4- order filled',
+      simnet.callPublicFn("market", "fill-order", [
+        uintCV(0),
+        contractPrincipalCV(simnet.deployer, "token1")
+      ], address2).result)
+
+    expectMatchSnapshot('5- balances after trade', simnet.getAssetsMap())
   });
 
 
